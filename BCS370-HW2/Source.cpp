@@ -28,22 +28,17 @@ void randomStream(std::string filename, int iterations)
         if (temp == 0) //if rand num produces 'A', use rand gen2 to add more rand nums
         {
             outputFile << letters[temp] << " " << dis2(gen2);//output to file
-            //std::cout << letters[temp] << " " << dis2(gen2);//output to console
         }
         else //if rand != A, the just add the letter
         {
             outputFile << letters[temp];
-            //std::cout << letters[temp];
         }
         if (i != iterations - 1) //num of lines must be EXACTLY same as iterations...if not last line, add new line
         {
             outputFile << "\n";
-            //std::cout << "\n";
         }
     }
     outputFile.close(); //close file
-
-    std::cout << "randomStream() success" << std::endl;
 }
 
 void testStream(std::string filename) 
@@ -59,33 +54,106 @@ void testStream(std::string filename)
     if (myfile.is_open())
     {
         string line;
-
         while (getline(myfile, line))
         {
             switch (line[0])
             {
                 case 'A':
                 {
-                    std::cout << line << std::endl;
+                    //get the number from the remainder of the line as a string
+                    line.erase(0, 2);
+
+                    //enqueue()that string into all of the queues
+                    queue1->enqueue(line);
+                    queue2->enqueue(line);
+                    queue3->enqueue(line);
+                    queue4->enqueue(line);
+
+                    /*
+                    It must check the return value of the enqueue() operations. 
+                    If any of the enqueues return FAILURE because they are full, 
+                    all must return that same return code 
+                    (since these are dynamic, this really is not expected). 
+                    If only some of the queues return FAILURE, that is an error, 
+                    and it should terminate and print the line number from the instruction file 
+                    (not the program line number)
+                    */
+
+                    //std::cout << line << std::endl; //console print test
                     break;
                 }
                 case 'P':
                 {
-                    std::cout << line << std::endl;
+                    //peek() the queues
+                    queue1->peek(line);
+                    queue2->peek(line);
+                    queue3->peek(line);
+                    queue4->peek(line);
+
+                    /*
+                    It must check the return value of the peek()operations. 
+                    If any of the queues return FAILURE because they are empty, 
+                    all must return that same return code. 
+                    If only some of the queues return FAILURE, that is an error, 
+                    and it should terminate and print the line number from the instruction file.
+                    */
+
+                    /*
+                    If the peek()did not return FAILURE, 
+                    your code should make sure all peek()s “returned” the same top string element
+                    (we use “return” loosely here to include data returned to the caller as a reference parameter) 
+                    */
+
+                    //std::cout << line << std::endl; //console print test
                     break;
                 }
                 case 'D':
                 {
-                    std::cout << line << std::endl;
+                    //dequeue() all the queues
+                    queue1->dequeue(line);
+                    queue2->dequeue(line);
+                    queue3->dequeue(line);
+                    queue4->dequeue(line);
+
+                    /*
+                    It must check the return value of the dequeue()operations. 
+                    If any of the queues return FAILURE because they are empty, 
+                    all must return that same return code. 
+                    If only some of the queues return FAILURE, that is an error, 
+                    and it should terminate and print the line number from the instruction file.
+                    */
+
+                    /*
+                    If the queues were not empty (that is, if it did not return FAILURE),
+                    it must check all elements removed from each queue were the same  
+                    */
+
+                    //std::cout << line << std::endl; //console print test
                     break;
                 }
                 case 'E':
                 {
-                    std::cout << line << std::endl;
+                    //should check if the queues are empty
+                    queue1->isEmpty();
+                    queue2->isEmpty();
+                    queue3->isEmpty();
+                    queue4->isEmpty();
+                    
+                    /*
+                    It should run isEmpty() on all queues
+                    It should check the return values of isEmpty(). 
+                    True or false is fine, but all must agree. 
+                    If they don’t agree, then it’s an error. 
+                    */
+                    
+                    //std::cout << line << std::endl; //console print test
                     break;
                 }
                 default:
                 {
+                    //If the line is anything other than D, E, P or A, ignore the line.
+                    
+                    //std::cout << line << std::endl; //console print test
                     break;
                 }
             }
