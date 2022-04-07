@@ -16,3 +16,4 @@ namespace farmingdale {
 // to use these constants, specify farmingdale::statusCode::farmingdale::statusCode::SUCCESS or farmingdale::statusCode::farmingdale::statusCode::FAILURE in your code
 
 #endif // ndef H_FARMINGDALESTATUS
+
