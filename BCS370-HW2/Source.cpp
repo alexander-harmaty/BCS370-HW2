@@ -49,25 +49,29 @@ void testStream(std::string filename)
     farmingdale::queue<std::string>* queue3 = new farmingdale::queue<std::string>();
     farmingdale::queue<std::string>* queue4 = new farmingdale::queue<std::string>();
 
+    //open file
     fstream myfile;
     myfile.open(filename, ios::in);
+
+    //read each line of the file
     if (myfile.is_open())
     {
-        string line;
-        while (getline(myfile, line))
+        string fileLine;
+        while (getline(myfile, fileLine))
         {
-            switch (line[0])
+            //process each line as if it was a set of instructions
+            switch (fileLine[0])
             {
                 case 'A':
                 {
                     //get the number from the remainder of the line as a string
-                    line.erase(0, 2);
+                    fileLine.erase(0, 2);
 
                     //enqueue()that string into all of the queues
-                    queue1->enqueue(line);
-                    queue2->enqueue(line);
-                    queue3->enqueue(line);
-                    queue4->enqueue(line);
+                    queue1->enqueue(fileLine);
+                    queue2->enqueue(fileLine);
+                    queue3->enqueue(fileLine);
+                    queue4->enqueue(fileLine);
 
                     /*
                     It must check the return value of the enqueue() operations. 
@@ -85,10 +89,10 @@ void testStream(std::string filename)
                 case 'P':
                 {
                     //peek() the queues
-                    queue1->peek(line);
-                    queue2->peek(line);
-                    queue3->peek(line);
-                    queue4->peek(line);
+                    queue1->peek(fileLine);
+                    queue2->peek(fileLine);
+                    queue3->peek(fileLine);
+                    queue4->peek(fileLine);
 
                     /*
                     It must check the return value of the peek()operations. 
@@ -110,10 +114,10 @@ void testStream(std::string filename)
                 case 'D':
                 {
                     //dequeue() all the queues
-                    queue1->dequeue(line);
-                    queue2->dequeue(line);
-                    queue3->dequeue(line);
-                    queue4->dequeue(line);
+                    queue1->dequeue(fileLine);
+                    queue2->dequeue(fileLine);
+                    queue3->dequeue(fileLine);
+                    queue4->dequeue(fileLine);
 
                     /*
                     It must check the return value of the dequeue()operations. 
