@@ -96,10 +96,10 @@ void testStream(std::string filename)
                 case 'P':
                 {
                     //peek() the queues
-                    queue1->peek(fileLine);
-                    queue2->peek(fileLine);
-                    queue3->peek(fileLine);
-                    queue4->peek(fileLine);
+                    queue1.peek(fileLine);
+                    queue2.peek(fileLine);
+                    queue3.peek(fileLine);
+                    queue4.peek(fileLine);
 
                     /*
                     It must check the return value of the peek()operations. 
@@ -121,10 +121,10 @@ void testStream(std::string filename)
                 case 'D':
                 {
                     //dequeue() all the queues
-                    queue1->dequeue(fileLine);
-                    queue2->dequeue(fileLine);
-                    queue3->dequeue(fileLine);
-                    queue4->dequeue(fileLine);//new variables for each, including return
+                    queue1.dequeue(fileLine);
+                    queue2.dequeue(fileLine);
+                    queue3.dequeue(fileLine);
+                    queue4.dequeue(fileLine);//new variables for each, including return
 
                     /*
                     It must check the return value of the dequeue()operations. 
@@ -145,10 +145,10 @@ void testStream(std::string filename)
                 case 'E':
                 {
                     //should check if the queues are empty
-                    queue1->isEmpty();
-                    queue2->isEmpty();
-                    queue3->isEmpty();
-                    queue4->isEmpty();
+                    queue1.isEmpty();
+                    queue2.isEmpty();
+                    queue3.isEmpty();
+                    queue4.isEmpty();
                     
                     /*
                     It should run isEmpty() on all queues
