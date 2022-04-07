@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <random>
-#include "../../M05_DynQueue/DataStructuresDynamicQueue/farmingdaleDynamicContiguousMemoryQueue.h"
+#include "farmingdaleDynamicContiguousMemoryQueue.h"
 
 using namespace std;
 
@@ -44,20 +44,20 @@ void randomStream(std::string filename, int iterations)
 void testStream(std::string filename) 
 {
     //create four instances of the farmingdale::queue ADT holding std::strings. 
-    farmingdale::queue<std::string>* queue1 = new farmingdale::queue<std::string>();
-    farmingdale::queue<std::string>* queue2 = new farmingdale::queue<std::string>();
-    farmingdale::queue<std::string>* queue3 = new farmingdale::queue<std::string>();
-    farmingdale::queue<std::string>* queue4 = new farmingdale::queue<std::string>();
+    farmingdale::queue<std::string> queue1;
+    farmingdale::queue<std::string> queue2;
+    farmingdale::queue<std::string> queue3;
+    farmingdale::queue<std::string> queue4;
 
     //open file
-    fstream myfile;
-    myfile.open(filename, ios::in);
+    fstream myFile;
+    myFile.open(filename, ios::in);
 
     //read each line of the file
-    if (myfile.is_open())
+    if (myFile.is_open())
     {
         string fileLine;
-        while (getline(myfile, fileLine))
+        while (getline(myFile, fileLine))
         {
             //process each line as if it was a set of instructions
             switch (fileLine[0])
@@ -68,10 +68,10 @@ void testStream(std::string filename)
                     fileLine.erase(0, 2);
 
                     //enqueue()that string into all of the queues
-                    queue1->enqueue(fileLine);
-                    queue2->enqueue(fileLine);
-                    queue3->enqueue(fileLine);
-                    queue4->enqueue(fileLine);
+                    queue1.enqueue(fileLine);
+                    queue2.enqueue(fileLine);
+                    queue3.enqueue(fileLine);
+                    queue4.enqueue(fileLine);//set these to a variable and compare the value that way
 
                     /*
                     It must check the return value of the enqueue() operations. 
@@ -82,6 +82,13 @@ void testStream(std::string filename)
                     and it should terminate and print the line number from the instruction file 
                     (not the program line number)
                     */
+                    if (queue1.enqueue(fileLine) != queue2.enqueue(fileLine) 
+                        != queue3.enqueue(fileLine) != queue4.enqueue(fileLine))//this enquques everything twice
+                    {
+                        //terminate and return instruction file line number
+                    }
+
+
 
                     //std::cout << line << std::endl; //console print test
                     break;
@@ -117,7 +124,7 @@ void testStream(std::string filename)
                     queue1->dequeue(fileLine);
                     queue2->dequeue(fileLine);
                     queue3->dequeue(fileLine);
-                    queue4->dequeue(fileLine);
+                    queue4->dequeue(fileLine);//new variables for each, including return
 
                     /*
                     It must check the return value of the dequeue()operations. 
@@ -162,7 +169,7 @@ void testStream(std::string filename)
                 }
             }
         }
-        myfile.close();
+        myFile.close();
     }
 }
 
