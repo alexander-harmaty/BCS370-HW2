@@ -1,6 +1,8 @@
 #include <iostream>
-#include <random>
 #include <fstream>
+#include <random>
+#include "../../M05_DynQueue/DataStructuresDynamicQueue/farmingdaleDynamicContiguousMemoryQueue.h"
+
 using namespace std;
 
 void randomStream(std::string filename, int iterations)
@@ -42,6 +44,54 @@ void randomStream(std::string filename, int iterations)
     outputFile.close(); //close file
 
     std::cout << "randomStream() success" << std::endl;
+}
+
+void testStream(std::string filename) 
+{
+    //create four instances of the farmingdale::queue ADT holding std::strings. 
+    farmingdale::queue<std::string>* queue1 = new farmingdale::queue<std::string>();
+    farmingdale::queue<std::string>* queue2 = new farmingdale::queue<std::string>();
+    farmingdale::queue<std::string>* queue3 = new farmingdale::queue<std::string>();
+    farmingdale::queue<std::string>* queue4 = new farmingdale::queue<std::string>();
+
+    fstream myfile;
+    myfile.open(filename, ios::in);
+    if (myfile.is_open())
+    {
+        string line;
+
+        while (getline(myfile, line))
+        {
+            switch (line[0])
+            {
+                case 'A':
+                {
+                    std::cout << line << std::endl;
+                    break;
+                }
+                case 'P':
+                {
+                    std::cout << line << std::endl;
+                    break;
+                }
+                case 'D':
+                {
+                    std::cout << line << std::endl;
+                    break;
+                }
+                case 'E':
+                {
+                    std::cout << line << std::endl;
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+            }
+        }
+        myfile.close();
+    }
 }
 
 int main() {
@@ -95,6 +145,8 @@ int main() {
             case 3:
             {
                 std::cout << "\nUser selected option 3 ... Starting testStream" << std::endl;
+
+                testStream("test.txt");
 
                 break;
             }
