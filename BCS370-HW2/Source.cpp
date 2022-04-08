@@ -95,12 +95,11 @@ void testStream(std::string filename)
                     and it should terminate and print the line number from the instruction file 
                     (not the program line number)
                     */
-
                     if (statusCodeQueue1 != statusCodeQueue2 ||
                         statusCodeQueue1 != statusCodeQueue3 ||
                         statusCodeQueue1 != statusCodeQueue4)
                     {
-                        std::cout << "ERROR on instruction file line " << iterator << "!" << std::endl;
+                        std::cout << "StatusCode ERROR on instruction file line " << iterator << "!" << std::endl;
                         std::cout << "Terminating program!" << std::endl;
                         exit(0);
                     }
@@ -122,12 +121,28 @@ void testStream(std::string filename)
                     If only some of the queues return FAILURE, that is an error, 
                     and it should terminate and print the line number from the instruction file.
                     */
+                    if (statusCodeQueue1 != statusCodeQueue2 ||
+                        statusCodeQueue1 != statusCodeQueue3 ||
+                        statusCodeQueue1 != statusCodeQueue4)
+                    {
+                        std::cout << "StatusCode ERROR on instruction file line " << iterator << "!" << std::endl;
+                        std::cout << "Terminating program!" << std::endl;
+                        exit(0);
+                    }
 
                     /*
                     If the peek()did not return FAILURE, 
                     your code should make sure all peek()s “returned” the same top string element
                     (we use “return” loosely here to include data returned to the caller as a reference parameter) 
                     */
+                    if (peekValue1 != peekValue2 ||
+                        peekValue1 != peekValue3 ||
+                        peekValue1 != peekValue4)
+                    {
+                        std::cout << "PeekValue ERROR on instruction file line " << iterator << "!" << std::endl;
+                        std::cout << "Terminating program!" << std::endl;
+                        exit(0);
+                    }
 
                     //std::cout << line << std::endl; //console print test
                     break;
