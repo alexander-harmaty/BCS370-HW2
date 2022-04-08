@@ -20,7 +20,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\M05_DynQueue\DataStructuresDynamicQueue\farmingdaleDynamicContiguousMemoryQueue.h">
+    <ClInclude Include="farmingdaleDynamicContiguousMemoryQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="farmingdaleStatus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

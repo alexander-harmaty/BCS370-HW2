@@ -142,7 +142,8 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\M05_DynQueue\DataStructuresDynamicQueue\farmingdaleDynamicContiguousMemoryQueue.h" />
+    <ClInclude Include="farmingdaleDynamicContiguousMemoryQueue.h" />
+    <ClInclude Include="farmingdaleStatus.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
