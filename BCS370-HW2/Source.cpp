@@ -49,11 +49,24 @@ void testStream(std::string filename)
     farmingdale::queue<std::string> queue3;
     farmingdale::queue<std::string> queue4;
 
+    //initialize statusCode variables to compare cases
+    farmingdale::statusCode statusCodeQueue1;
+    farmingdale::statusCode statusCodeQueue2;
+    farmingdale::statusCode statusCodeQueue3;
+    farmingdale::statusCode statusCodeQueue4;
+
+    //initalize peekValue variables to compare cases
+    std::string peekValue1;
+    std::string peekValue2;
+    std::string peekValue3;
+    std::string peekValue4;
+
     //open file
     fstream myFile;
     myFile.open(filename, ios::in);
 
     //read each line of the file
+    int iterator = 1;
     if (myFile.is_open())
     {
         string fileLine;
@@ -67,39 +80,40 @@ void testStream(std::string filename)
                     //get the number from the remainder of the line as a string
                     fileLine.erase(0, 2);
 
-                    //enqueue()that string into all of the queues
-                    queue1.enqueue(fileLine);
-                    queue2.enqueue(fileLine);
-                    queue3.enqueue(fileLine);
-                    queue4.enqueue(fileLine);//set these to a variable and compare the value that way
+                    //enqueue() number into all of the queues and return status codes
+                    statusCodeQueue1 = queue1.enqueue(fileLine);
+                    statusCodeQueue2 = queue2.enqueue(fileLine);
+                    statusCodeQueue3 = queue3.enqueue(fileLine);
+                    statusCodeQueue4 = queue4.enqueue(fileLine);
 
                     /*
                     It must check the return value of the enqueue() operations. 
                     If any of the enqueues return FAILURE because they are full, 
-                    all must return that same return code 
-                    (since these are dynamic, this really is not expected). 
+                    all must return that same return code. 
+                    (since these are dynamic, this really is not expected) 
                     If only some of the queues return FAILURE, that is an error, 
                     and it should terminate and print the line number from the instruction file 
                     (not the program line number)
                     */
-                    if (queue1.enqueue(fileLine) != queue2.enqueue(fileLine) 
-                        != queue3.enqueue(fileLine) != queue4.enqueue(fileLine))//this enquques everything twice
+
+                    if (statusCodeQueue1 != statusCodeQueue2 ||
+                        statusCodeQueue1 != statusCodeQueue3 ||
+                        statusCodeQueue1 != statusCodeQueue4)
                     {
-                        //terminate and return instruction file line number
+                        std::cout << "ERROR on instruction file line " << iterator << "!" << std::endl;
+                        std::cout << "Terminating program!" << std::endl;
+                        exit(0);
                     }
 
-
-
-                    //std::cout << line << std::endl; //console print test
                     break;
                 }
                 case 'P':
                 {
                     //peek() the queues
-                    queue1.peek(fileLine);
-                    queue2.peek(fileLine);
-                    queue3.peek(fileLine);
-                    queue4.peek(fileLine);
+                    statusCodeQueue1 = queue1.peek(peekValue1);
+                    statusCodeQueue2 = queue2.peek(peekValue2);
+                    statusCodeQueue3 = queue3.peek(peekValue3);
+                    statusCodeQueue4 = queue4.peek(peekValue4);
 
                     /*
                     It must check the return value of the peek()operations. 
@@ -168,6 +182,7 @@ void testStream(std::string filename)
                     break;
                 }
             }
+            iterator++;
         }
         myFile.close();
     }
@@ -256,7 +271,5 @@ int main() {
             }
         }
     }
-
     exit(0);
-
 }
