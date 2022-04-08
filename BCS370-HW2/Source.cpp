@@ -111,7 +111,8 @@ void testStream(std::string filename)
                         statusCodeQueue1 != statusCodeQueue3 ||
                         statusCodeQueue1 != statusCodeQueue4)
                     {
-                        std::cout << "StatusCode ERROR on instruction file line " << iterator << "!" << std::endl;
+                        std::cout << "testStream() FAILURE" << std::endl;
+                        std::cout << "Enqueue statusCode ERROR on instruction file line " << iterator << "!" << std::endl;
                         std::cout << "Terminating program!" << std::endl;
                         exit(0);
                     }
@@ -137,7 +138,8 @@ void testStream(std::string filename)
                         statusCodeQueue1 != statusCodeQueue3 ||
                         statusCodeQueue1 != statusCodeQueue4)
                     {
-                        std::cout << "StatusCode ERROR on instruction file line " << iterator << "!" << std::endl;
+                        std::cout << "testStream() FAILURE" << std::endl;
+                        std::cout << "Peek statusCode ERROR on instruction file line " << iterator << "!" << std::endl;
                         std::cout << "Terminating program!" << std::endl;
                         exit(0);
                     }
@@ -151,12 +153,12 @@ void testStream(std::string filename)
                         peekValue1 != peekValue3 ||
                         peekValue1 != peekValue4)
                     {
+                        std::cout << "testStream() FAILURE" << std::endl;
                         std::cout << "PeekValue ERROR on instruction file line " << iterator << "!" << std::endl;
                         std::cout << "Terminating program!" << std::endl;
                         exit(0);
                     }
 
-                    //std::cout << line << std::endl; //console print test
                     break;
                 }
                 case 'D':
@@ -178,7 +180,8 @@ void testStream(std::string filename)
                         statusCodeQueue1 != statusCodeQueue3 ||
                         statusCodeQueue1 != statusCodeQueue4)
                     {
-                        std::cout << "StatusCode ERROR on instruction file line " << iterator << "!" << std::endl;
+                        std::cout << "testStream() FAILURE" << std::endl;
+                        std::cout << "Dequeue statusCode ERROR on instruction file line " << iterator << "!" << std::endl;
                         std::cout << "Terminating program!" << std::endl;
                         exit(0);
                     }
@@ -191,12 +194,12 @@ void testStream(std::string filename)
                         dequeueValue1 != dequeueValue3 ||
                         dequeueValue1 != dequeueValue4)
                     {
+                        std::cout << "testStream() FAILURE" << std::endl;
                         std::cout << "DequeueValue ERROR on instruction file line " << iterator << "!" << std::endl;
                         std::cout << "Terminating program!" << std::endl;
                         exit(0);
                     }
 
-                    //std::cout << line << std::endl; //console print test
                     break;
                 }
                 case 'E':
@@ -217,25 +220,25 @@ void testStream(std::string filename)
                         queueIsEmpty1 != queueIsEmpty3 ||
                         queueIsEmpty1 != queueIsEmpty4)
                     {
+                        std::cout << "testStream() FAILURE" << std::endl;
                         std::cout << "IsEmpty ERROR on instruction file line " << iterator << "!" << std::endl;
                         std::cout << "Terminating program!" << std::endl;
                         exit(0);
                     }
                     
-                    //std::cout << line << std::endl; //console print test
                     break;
                 }
                 default:
                 {
                     //If the line is anything other than D, E, P or A, ignore the line.
                     
-                    //std::cout << line << std::endl; //console print test
                     break;
                 }
             }
             iterator++;
         }
         myFile.close();
+        std::cout << "\ntestStream() SUCCESS" << std::endl;
     }
 }
 
@@ -245,6 +248,8 @@ int main() {
 
     bool programRunning = true;
     int choice;
+    string filename;
+    int iterations;
 
     //MAIN MENU
     while (programRunning) 
@@ -270,16 +275,14 @@ int main() {
             }
             case 2:
             {
-                std::cout << "\nUser selected option 2 ... Starting randomStream" << std::endl;
+                std::cout << "\nUser selected option 2: randomStream!" << std::endl;
 
                 //ask for filename
                 std::cout << "\nPlease input a filename. (remember to add an extension, ie '.txt')...";
-                string filename;
                 std::cin >> filename;
 
                 //ask for iterations
-                std::cout << "Please input the iterations...";
-                int iterations;
+                std::cout << "\nPlease input the iterations...";
                 std::cin >> iterations;
 
                 //call method
@@ -289,28 +292,37 @@ int main() {
             }
             case 3:
             {
-                std::cout << "\nUser selected option 3 ... Starting testStream" << std::endl;
+                std::cout << "\nUser selected option 3: testStream!" << std::endl;
 
-                testStream("test.txt");
+                //ask for filename
+                std::cout << "\nPlease input a filename. (remember to add an extension, ie '.txt')...";
+                std::cin >> filename;
+
+                //call method
+                testStream(filename);
 
                 break;
             }
             case 4:
             {
-                std::cout << "\nUser selected option 4 ... Starting randomStream" << std::endl;
+                std::cout << "\nUser selected option 4: randomStream AND testStream!" << std::endl;
+                std::cout << "Starting randomStream..." << std::endl;
 
                 //ask for filename
-                std::cout << "Please input a filename. (remember to add an extension, ie '.txt')...";
-                string filename;
+                std::cout << "\nPlease input a filename. (remember to add an extension, ie '.txt')...";
                 std::cin >> filename;
 
                 //ask for iterations
-                std::cout << "Please input the iterations...";
-                int iterations;
+                std::cout << "\nPlease input the iterations...";
                 std::cin >> iterations;
 
-                //call method
+                //call randomStream method
                 randomStream(filename, iterations);
+
+                //call testStream method
+                std::cout << "\nStarting testStream..." << std::endl;
+                std::cout << "Using the previous filename: " << filename << std::endl;
+                testStream(filename);
 
                 break;
             }
