@@ -61,6 +61,18 @@ void testStream(std::string filename)
     std::string peekValue3;
     std::string peekValue4;
 
+    //initalize dequeueValue variables to compare cases
+    std::string dequeueValue1;
+    std::string dequeueValue2;
+    std::string dequeueValue3;
+    std::string dequeueValue4;
+
+    //initialize isEmpty bools to compare cases
+    bool queueIsEmpty1;
+    bool queueIsEmpty2;
+    bool queueIsEmpty3;
+    bool queueIsEmpty4;
+
     //open file
     fstream myFile;
     myFile.open(filename, ios::in);
@@ -150,10 +162,10 @@ void testStream(std::string filename)
                 case 'D':
                 {
                     //dequeue() all the queues
-                    queue1.dequeue(fileLine);
-                    queue2.dequeue(fileLine);
-                    queue3.dequeue(fileLine);
-                    queue4.dequeue(fileLine);//new variables for each, including return
+                    statusCodeQueue1 = queue1.dequeue(dequeueValue1);
+                    statusCodeQueue2 = queue2.dequeue(dequeueValue2);
+                    statusCodeQueue3 = queue3.dequeue(dequeueValue3);
+                    statusCodeQueue4 = queue4.dequeue(dequeueValue4);
 
                     /*
                     It must check the return value of the dequeue()operations. 
@@ -162,11 +174,27 @@ void testStream(std::string filename)
                     If only some of the queues return FAILURE, that is an error, 
                     and it should terminate and print the line number from the instruction file.
                     */
+                    if (statusCodeQueue1 != statusCodeQueue2 ||
+                        statusCodeQueue1 != statusCodeQueue3 ||
+                        statusCodeQueue1 != statusCodeQueue4)
+                    {
+                        std::cout << "StatusCode ERROR on instruction file line " << iterator << "!" << std::endl;
+                        std::cout << "Terminating program!" << std::endl;
+                        exit(0);
+                    }
 
                     /*
                     If the queues were not empty (that is, if it did not return FAILURE),
                     it must check all elements removed from each queue were the same  
                     */
+                    if (dequeueValue1 != dequeueValue2 ||
+                        dequeueValue1 != dequeueValue3 ||
+                        dequeueValue1 != dequeueValue4)
+                    {
+                        std::cout << "DequeueValue ERROR on instruction file line " << iterator << "!" << std::endl;
+                        std::cout << "Terminating program!" << std::endl;
+                        exit(0);
+                    }
 
                     //std::cout << line << std::endl; //console print test
                     break;
@@ -174,10 +202,10 @@ void testStream(std::string filename)
                 case 'E':
                 {
                     //should check if the queues are empty
-                    queue1.isEmpty();
-                    queue2.isEmpty();
-                    queue3.isEmpty();
-                    queue4.isEmpty();
+                    queueIsEmpty1 = queue1.isEmpty();
+                    queueIsEmpty2 = queue2.isEmpty();
+                    queueIsEmpty3 = queue3.isEmpty();
+                    queueIsEmpty4 = queue4.isEmpty();
                     
                     /*
                     It should run isEmpty() on all queues
@@ -185,6 +213,14 @@ void testStream(std::string filename)
                     True or false is fine, but all must agree. 
                     If they don’t agree, then it’s an error. 
                     */
+                    if (queueIsEmpty1 != queueIsEmpty2 ||
+                        queueIsEmpty1 != queueIsEmpty3 ||
+                        queueIsEmpty1 != queueIsEmpty4)
+                    {
+                        std::cout << "IsEmpty ERROR on instruction file line " << iterator << "!" << std::endl;
+                        std::cout << "Terminating program!" << std::endl;
+                        exit(0);
+                    }
                     
                     //std::cout << line << std::endl; //console print test
                     break;
