@@ -1,4 +1,4 @@
-# RandStreams-on-Dynamic-Memory
+# Testing-Queue-Methods-with-RandomStream
 
 (FSC-BCS-370-HW2)
 
