@@ -1,4 +1,4 @@
-# Testing-Queue-Methods-with-RandomStream
+# Testing Queue Methods with RandomStream
 
 (FSC-BCS-370-HW2)
 
@@ -15,7 +15,7 @@ The goal of this assignment was to use the Dynamic Memory of Mod5 with the Rando
 HW1: https://github.com/alexander-harmaty/Random-Stream-Generator
 Mod5: https://github.com/alexander-harmaty/Dynamic-Queue-Data-Structure
 
-This project was made using C++ in Visual Studio 2022.
+This project was made using C++ in Visual Studio 2019.
 
 ## Features
 
